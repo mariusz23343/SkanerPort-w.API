@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +25,10 @@ namespace SkanerPortów.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SkanerPortów.API", Version = "v1" });
+            });
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=PortScannerBase;Trusted_Connection=True");
             });
         }
 
